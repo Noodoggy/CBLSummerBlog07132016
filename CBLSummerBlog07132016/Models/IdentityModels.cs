@@ -29,5 +29,11 @@ namespace CBLSummerBlog07132016.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<CBLSummerBlog07132016.Models.BlogPost> BlogPosts { get; set; }
+
+        public System.Data.Entity.DbSet<CBLSummerBlog07132016.Models.Comment> CommentViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<CBLSummerBlog07132016.Models.Contact> Contacts { get; set; }
     }
 }

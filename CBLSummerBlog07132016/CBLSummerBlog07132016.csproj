@@ -44,6 +44,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -168,11 +196,24 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607181913354_InitialCreate.cs" />
+    <Compile Include="Migrations\201607181913354_InitialCreate.Designer.cs">
+      <DependentUpon>201607181913354_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\TinyMCEModel.cs" />
+    <Compile Include="Models\ImageUploadValidatorModel.cs" />
+    <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\BlogModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -180,14 +221,110 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\flexslider.css" />
+    <Content Include="assets\css\font-awesome.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\prettify.css" />
+    <Content Include="assets\css\styles-1.css" />
+    <Content Include="assets\css\styles-2.css" />
+    <Content Include="assets\css\styles-3.css" />
+    <Content Include="assets\css\styles-4.css" />
+    <Content Include="assets\css\styles-5.css" />
+    <Content Include="assets\css\styles-6.css" />
+    <Content Include="assets\css\styles-7.css" />
+    <Content Include="assets\css\styles-8.css" />
+    <Content Include="assets\css\styles-9.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\images\about.jpg" />
+    <Content Include="assets\images\aboutbg.jpg" />
+    <Content Include="assets\images\apple-touch-icon-114x114.png" />
+    <Content Include="assets\images\apple-touch-icon-72x72.png" />
+    <Content Include="assets\images\apple-touch-icon.png" />
+    <Content Include="assets\images\bars-bg.png" />
+    <Content Include="assets\images\chash.png" />
+    <Content Include="assets\images\client-1.jpg" />
+    <Content Include="assets\images\client-2.jpg" />
+    <Content Include="assets\images\client-3.jpg" />
+    <Content Include="assets\images\client-4.jpg" />
+    <Content Include="assets\images\client-logo-1.png" />
+    <Content Include="assets\images\client-logo-2.png" />
+    <Content Include="assets\images\client-logo-3.png" />
+    <Content Include="assets\images\client-logo-4.png" />
+    <Content Include="assets\images\contact.jpg" />
+    <Content Include="assets\images\favicon.ico" />
+    <Content Include="assets\images\favicon.png" />
+    <Content Include="assets\images\featured-1.png" />
+    <Content Include="assets\images\featured-2.png" />
+    <Content Include="assets\images\Hard-Drive-450px.gif" />
+    <Content Include="assets\images\Hard-Drive.gif" />
+    <Content Include="assets\images\header-bg.png" />
+    <Content Include="assets\images\header-img.png" />
+    <Content Include="assets\images\header.png" />
+    <Content Include="assets\images\header2.png" />
+    <Content Include="assets\images\header3.png" />
+    <Content Include="assets\images\headerbg.png" />
+    <Content Include="assets\images\HTML-logo.png" />
+    <Content Include="assets\images\jquery_logo.png" />
+    <Content Include="assets\images\logo-bw.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\map.jpg" />
+    <Content Include="assets\images\mvc.png" />
+    <Content Include="assets\images\mylogo-bw.png" />
+    <Content Include="assets\images\mylogo.png" />
+    <Content Include="assets\images\polygon.png" />
+    <Content Include="assets\images\preloader.gif" />
+    <Content Include="assets\images\profile-img.jpg" />
+    <Content Include="assets\images\profile.jpg" />
+    <Content Include="assets\images\project-viewer-bg.png" />
+    <Content Include="assets\images\projects\blog-pic.jpg" />
+    <Content Include="assets\images\projects\budget-tracker.jpg" />
+    <Content Include="assets\images\projects\bug-tracking.jpg" />
+    <Content Include="assets\images\projects\car-finder.jpg" />
+    <Content Include="assets\images\projects\factorial.jpg" />
+    <Content Include="assets\images\projects\fizz-buzz.jpg" />
+    <Content Include="assets\images\projects\mathematical-operations.jpg" />
+    <Content Include="assets\images\projects\palindrome-1.jpg" />
+    <Content Include="assets\images\skills-bg.png" />
+    <Content Include="assets\images\video-loader.gif" />
+    <Content Include="assets\js\contact.js" />
+    <Content Include="assets\js\jquery.easing.1.3.js" />
+    <Content Include="assets\js\jquery.easing.1.3.min.js" />
+    <Content Include="assets\js\jquery.easypiechart.js" />
+    <Content Include="assets\js\jquery.fitvids.js" />
+    <Content Include="assets\js\jquery.flexslider.js" />
+    <Content Include="assets\js\jquery.flexslider.min.js" />
+    <Content Include="assets\js\libs\bootstrap.js" />
+    <Content Include="assets\js\libs\bootstrap.min.js" />
+    <Content Include="assets\js\libs\jquery-1.9.1.min.js" />
+    <Content Include="assets\js\libs\modernizr.min.js" />
+    <Content Include="assets\js\libs\respond.min.js" />
+    <Content Include="assets\js\libs\respond.src.js" />
+    <Content Include="assets\js\prettify.js" />
+    <Content Include="assets\js\scripts.js" />
+    <Content Include="assets\js\twitterFetcher_min.js" />
+    <Content Include="assets\js\waypoints.js" />
+    <Content Include="assets\js\waypoints.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\css\Benton-Landry-Resume.pdf" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -234,6 +371,22 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_NewLayout.cshtml" />
+    <Content Include="Views\Comment\Create.cshtml" />
+    <Content Include="Views\Comment\Delete.cshtml" />
+    <Content Include="Views\Comment\Details.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Contact\Create.cshtml" />
+    <Content Include="Views\Contact\Delete.cshtml" />
+    <Content Include="Views\Contact\Details.cshtml" />
+    <Content Include="Views\Contact\Edit.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Blog\Create.cshtml" />
+    <Content Include="Views\Blog\Delete.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Blog\Edit.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +398,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607181913354_InitialCreate.resx">
+      <DependentUpon>201607181913354_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

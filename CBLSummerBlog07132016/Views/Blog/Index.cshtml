@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CBLSummerBlog07132016.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Blog";
+}
+
+@{
+    var profile = "profile";
+    var styletype = "big-padding";
+    var aboutortwitter = "about";
+    var rightorleft = "scrollimation fade-right";
+    var textcenter = "";
+    var counter = 0;
+
+    foreach (var item in Model)
+    {
+        if (counter % 2 != 0)
+        {
+            aboutortwitter = "twitter-feeds";
+            rightorleft = "scrollimation fade-left";
+            textcenter = "";
+            styletype = "bg-main-color";
+        }
+        else
+        {
+            profile = "profile";
+            styletype = "big-padding";
+            aboutortwitter = "about";
+            rightorleft = "scrollimation fade-right";
+            textcenter = "";
+        }
+        counter++;
+<section id="@aboutortwitter" class="@styletype @rightorleft">
+        <div class="container @textcenter ">
+            <div class="row @profile">
+                <div class="col-sm-9 col-sm-offset-1" @textcenter>
+                       @{var shortbody = "";
+                        if (item.BodyText.Length >= 139)
+                        {
+                            shortbody = item.BodyText.Substring(0, 136) + "...";
+                        }
+                        else
+                        {
+                            shortbody = item.BodyText;
+                        }
+                        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                        <p>
+                            @if (item.MediaUrl != null)
+                            {
+                                <img class="img-responsive" src="@Url.Content(item.MediaUrl)" alt="" />
+                            }
+                        </p>
+                        <h3>@Html.Raw(shortbody)</h3>
+                        <a href="../Blog/@Html.DisplayFor(modelItem => item.Slug)#comments">
+                            <span style="font-size: 12px;">@item.Comments.Count</span>
+                            <span style="font-size: 12px;"> comments</span>
+                        </a>
+                        <h3 id="right">@Html.ActionLink("Read the blog...", "Details", new { slug = item.Slug })</h3>
+                        <h5><span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(modelItem => item.CreateDate.LocalDateTime)</h5>
+
+                           if (item.UpdateDate != null)
+                           {
+                            <h5>
+                                Updated at <span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(modelItem => item.UpdateDate)
+
+                            </h5>
+                               }
+
+                           }
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    }
+}
+
+
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+    
